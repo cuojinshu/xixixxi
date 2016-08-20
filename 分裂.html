@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+body,div{ margin:0; padding:0;}
+.ball{ width:600px; height:600px; background:#000; border-radius:50%; margin:0 auto}
+.ball div{ float:left; width:50%; height:50%;  border-radius:50%;}
+</style>
+</head>
+
+<body>
+<div class="ball" id="ball">
+</div>
+<script>
+var ballNode=document.getElementById('ball');
+ballNode.onmouseover=fun;
+function fun(){
+	var frag=document.createDocumentFragment();//创建碎片
+	for(var i=0;i<4;i++){
+		var div=document.createElement('div');
+		div.style.background=colorFun();
+		
+		div.onmouseover=fun;//给创建的div绑定事件
+		
+		frag.appendChild(div);
+	}
+	
+	this.style.background='none';//去除父节点的背景
+	this.appendChild(frag);
+	this.onmouseover=null;//销毁的事件
+}
+
+/*function colorFun(){
+	//#ffffff
+	//rgb(255,255,255)
+	var colorVal="rgb(";
+					  
+	for(var i=0;i<3;i++){
+		var rgbVal='';
+		if(i!=2)//i=0,i=1
+		{
+			rgbVal=Math.floor(Math.random()*256)+",";//"255,"
+		}
+		else//i=2
+		{
+			rgbVal=Math.floor(Math.random()*256)+")";//0-255整数
+		}
+		colorVal+=rgbVal;	
+	}
+	
+	return colorVal;
+}*/
+
+function colorFun(){
+	var colorVal="#";
+	var arr=['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
+	for(var i=0;i<6;i++){
+		var num=Math.floor(Math.random()*16);//0-15整数
+		colorVal+=arr[num];//colorVal=colorVal+arr[num];
+	}
+	
+	return colorVal;
+}
+</script>
+</body>
+</html>
